@@ -1,5 +1,12 @@
 'use strict';
 
+const fillArray = (arr, size) => { // Наполнение массива случайными числами
+	for (let i = 0; i < size; i++) {
+		const arrItem = Math.round(Math.random() * 10 + 1);
+		arr.push(arrItem);
+	}
+};
+
 /**
  * Task #1
  *
@@ -8,25 +15,25 @@
  *
  */
 
-const arr = [];
+const array = [];
 
-for (let i = 0; i < 10; i++) {
-	const arrItem = Math.round(Math.random() * 10 + 1);
-	arr.push(arrItem);
-}
+fillArray(array, 10);
 
 // 1. Функция принимает массив и выводит его на экран.
+
 /**
  *
  * @param arr
  */
 const getArrItems = arr => {
-	console.log(arr);
+	console.log(`Array: ${arr}`);
 };
-
-getArrItems(`Array: ${arr}`);
+console.group();
+getArrItems(array);
+console.groupEnd();
 
 // 2. Функция принимает массив и выводит только четные элементы.
+
 /**
  *
  * @param arr
@@ -41,9 +48,10 @@ const getEvenItems = arr => {
 	console.log(`Even elements: ${newArr}`);
 };
 
-getEvenItems(arr);
+getEvenItems(array);
 
 // 3. Функция принимает массив и возвращает сумму всех элементов массива.
+
 /**
  *
  * @param arr
@@ -54,11 +62,12 @@ const getSumOfItems = arr => {
 		sum += item;
 	});
 	console.log(`Sum = ${sum}`);
-}
+};
 
-getSumOfItems(arr);
+getSumOfItems(array);
 
 // 4. Функция принимает массив и возвращает его максимальный элемент.
+
 /**
  *
  * @param arr
@@ -71,10 +80,12 @@ const getMaxItem = arr => {
 		}
 	});
 	console.log(`Max value = ${max}`);
-}
-getMaxItem(arr);
+};
+
+getMaxItem(array);
 
 // 5. Функция добавления нового элемента в массив по указанному индексу.
+
 /**
  *
  * @param arr
@@ -84,11 +95,12 @@ getMaxItem(arr);
 const addNewItem = (arr, item, index) => {
 	arr.splice(index, 0, item);
 	console.log(`Array with new value '${item}': ${arr}`);
-}
+};
 
-addNewItem(arr, 25, 3);
+addNewItem(array, 25, 3);
 
 // 6. Функция удаления элемента из массива по указанному индексу.
+
 /**
  *
  * @param arr
@@ -97,6 +109,86 @@ addNewItem(arr, 25, 3);
 const removeItem = (arr, index) => {
 	arr.splice(index, 1);
 	console.log(`Array with removed item: ${arr}`);
-}
+};
 
-removeItem(arr, 3);
+removeItem(array, 3);
+
+/**
+ * Task #2
+ *
+ * Создать еще один массив из 5 случайных чисел и написать следующие функции.
+ *
+ */
+
+const array2 = [];
+
+fillArray(array2, 5);
+
+console.group();
+console.log(`Array 1: ${array}`);
+console.log(`Array 2: ${array2}`);
+console.groupEnd();
+
+/*
+	1. Функция принимает 2 массива и возвращает новый массив,
+	в котором собраны все элементы из двух массивов без повторений.
+*/
+
+/**
+ *
+ * @param arr1
+ * @param arr2
+ * @returns {array}
+ */
+const combineArrays = (arr1, arr2) => {
+	return arr1.concat(arr2);
+};
+
+console.log(`Combined arrays: ${combineArrays(array, array2)}`);
+
+/*
+	2. Функция принимает 2 массива и возвращает новый массив,
+	в котором собраны общие элементы (то есть элементы, которые
+	встречаются и в первом и во втором массивах) без повторений.
+*/
+
+/**
+ *
+ * @param arr1
+ * @param arr2
+ * @returns {array}
+ */
+const combineArrays2 = (arr1, arr2) => {
+	const newArr = [];
+	arr1.forEach(item => {
+		if (arr2.includes(item) && !newArr.includes(item)) {
+			newArr.push(item);
+		}
+	});
+	return newArr;
+};
+
+console.log(`v2 Combined arrays: ${combineArrays2(array, array2)}`);
+
+/*
+	3. Функция принимает 2 массива и возвращает новый массив,
+	в котором собраны все элементы из первого массива, которых нет во втором массиве.
+*/
+
+/**
+ *
+ * @param arr1
+ * @param arr2
+ * @returns {array}
+ */
+const combineArrays3 = (arr1, arr2) => {
+	const newArr = [];
+	arr1.forEach(item => {
+		if (!arr2.includes(item)) {
+			newArr.push(item);
+		}
+	});
+	return newArr;
+};
+
+console.log(`v3 Combined arrays: ${combineArrays3(array, array2)}`);
